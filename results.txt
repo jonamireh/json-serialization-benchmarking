@@ -1,0 +1,44 @@
+
+
+
+Benchmark                                 Mode  Cnt     Score    Error  Units
+SpeedTest.gson_reflective_toJson         thrpt   20   820.746 ± 25.848  ops/s
+SpeedTest.gson_streaming_toJson          thrpt   20   996.052 ± 23.301  ops/s
+SpeedTest.gson_streaming_toJson_buffer   thrpt   20   496.606 ± 13.792  ops/s
+SpeedTest.kserializer_toJson             thrpt   20   375.616 ±  7.755  ops/s
+SpeedTest.moshi_reflective_toJson        thrpt   20  1118.084 ± 78.331  ops/s
+SpeedTest.moshi_streaming_toJson         thrpt   20  1157.172 ± 93.864  ops/s
+SpeedTest.moshi_streaming_toJson_buffer  thrpt   20  1426.966 ± 33.162  ops/s
+
+Benchmark                                   Mode  Cnt     Score    Error  Units
+SpeedTest.gson_reflective_fromJson         thrpt   10  1183.401 ± 36.600  ops/s
+SpeedTest.gson_streaming_fromJson          thrpt   10  1176.528 ± 18.542  ops/s
+SpeedTest.gson_streaming_fromJson_buffer   thrpt   10  1033.197 ± 24.929  ops/s
+SpeedTest.kserializer_fromJson             thrpt   10   300.563 ±  8.846  ops/s
+SpeedTest.moshi_reflective_fromJson        thrpt   10   687.517 ± 11.954  ops/s
+SpeedTest.moshi_streaming_fromJson         thrpt   10   719.395 ± 24.423  ops/s
+SpeedTest.moshi_streaming_fromJson_buffer  thrpt   10   817.880 ± 20.398  ops/s
+
+-----------------
+
+-perf optimized
+
+Benchmark                                 Mode  Cnt     Score    Error  Units
+SpeedTest.gson_reflective_toJson         thrpt   20   852.561 ± 15.620  ops/s
+SpeedTest.gson_streaming_toJson          thrpt   20  1022.266 ± 17.730  ops/s
+SpeedTest.gson_streaming_toJson_buffer   thrpt   20   522.309 ± 10.330  ops/s
+SpeedTest.kserializer_toJson             thrpt   20   985.452 ± 17.961  ops/s
+SpeedTest.moshi_reflective_toJson        thrpt   20  1204.622 ± 26.366  ops/s
+SpeedTest.moshi_streaming_toJson         thrpt   20  1248.495 ± 22.924  ops/s
+SpeedTest.moshi_streaming_toJson_buffer  thrpt   20  1508.646 ± 27.443  ops/s
+
+
+Benchmark                                   Mode  Cnt     Score    Error  Units
+SpeedTest.gson_reflective_fromJson         thrpt   20  1206.518 ± 16.611  ops/s
+SpeedTest.gson_streaming_fromJson          thrpt   20  1155.199 ± 47.725  ops/s
+SpeedTest.gson_streaming_fromJson_buffer   thrpt   20  1066.076 ± 21.565  ops/s
+SpeedTest.kserializer_fromJson             thrpt   20   996.613 ± 18.420  ops/s
+SpeedTest.moshi_reflective_fromJson        thrpt   20   680.343 ± 11.271  ops/s
+SpeedTest.moshi_streaming_fromJson         thrpt   20   757.944 ± 25.096  ops/s
+SpeedTest.moshi_streaming_fromJson_buffer  thrpt   20   861.485 ± 20.341  ops/s
+
