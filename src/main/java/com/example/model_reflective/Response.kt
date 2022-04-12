@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 
 @Serializable
 class Response {
@@ -19,13 +20,13 @@ class Response {
     var isRealJson: Boolean = false
 
     fun stringify(): String {
-        return JSON.stringify(this)
+        return kotlinx.serialization.json.Json.encodeToString(this)
     }
 
     companion object {
         @JvmStatic
         fun parse(str: String): Response {
-            return JSON.Companion.parse(str)
+            return kotlinx.serialization.json.Json.decodeFromString(str)
         }
     }
 }

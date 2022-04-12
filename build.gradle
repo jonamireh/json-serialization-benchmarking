@@ -1,20 +1,23 @@
 buildscript {
-    ext.kotlin_version = '1.2.30'
-    ext.serialization_version = '0.4.2'
-    ext.serialization_runtime_version = '0.4.2'
-    ext.jmh_version = '1.20'
+    ext.kotlin_version = '1.6.20'
+    ext.serialization_version = '1.3.2'
+    ext.jmh_version = '1.35'
+    ext.autovalue_version = '1.9'
+    ext.autovalue_gson_version = '1.3.1'
+    ext.autovalue_moshi_version = '1.1.0'
+    ext.okio_version = '3.0.0'
+    ext.moshi_version = '1.13.0'
+    ext.gson_version = '2.9.0'
     
     repositories {
         jcenter()
         maven { url "https://plugins.gradle.org/m2/" }
-        maven { url "https://kotlin.bintray.com/kotlinx" }
     }
     dependencies {
-        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.2"
-        classpath "me.champeau.gradle:jmh-gradle-plugin:0.4.5"
-        classpath "net.ltgt.gradle:gradle-apt-plugin:0.10"
+        classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.2"
+        classpath "me.champeau.jmh:jmh-gradle-plugin:0.6.6"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:$serialization_version"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
     }
 }
 
@@ -23,11 +26,11 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'kotlin'
-apply plugin: 'kotlinx-serialization'
+apply plugin: "org.jetbrains.kotlin.plugin.serialization"
 apply plugin: 'idea'
-apply plugin: "net.ltgt.apt"
+apply plugin: "org.jetbrains.kotlin.kapt"
 apply plugin: "com.github.johnrengelman.shadow"
-apply plugin: "me.champeau.gradle.jmh"
+apply plugin: "me.champeau.jmh"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -35,7 +38,6 @@ targetCompatibility = 1.8
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "https://kotlin.bintray.com/kotlinx" }
 }
 
 jmh {
@@ -43,29 +45,27 @@ jmh {
 }
 
 dependencies {
-    apt 'com.google.auto.value:auto-value:1.4.1'
-    apt 'com.ryanharter.auto.value:auto-value-gson:0.4.6'
-    apt 'com.ryanharter.auto.value:auto-value-moshi:0.4.3'
+    kapt "com.google.auto.value:auto-value:$autovalue_version"
+    kapt "com.ryanharter.auto.value:auto-value-gson-extension:$autovalue_gson_version"
+    kapt "com.ryanharter.auto.value:auto-value-gson-factory:$autovalue_gson_version"
+    kapt "com.ryanharter.auto.value:auto-value-moshi-extension:$autovalue_moshi_version"
+    kapt "com.ryanharter.auto.value:auto-value-moshi-factory:$autovalue_moshi_version"
 
-    compileOnly 'com.google.auto.value:auto-value:1.4.1'
-    compileOnly 'com.ryanharter.auto.value:auto-value-gson:0.4.6'
-    compileOnly 'com.ryanharter.auto.value:auto-value-moshi:0.4.3'
+    compileOnly "com.google.auto.value:auto-value:$autovalue_version"
+    compileOnly "com.ryanharter.auto.value:auto-value-gson-runtime:$autovalue_gson_version"
+    compileOnly "com.ryanharter.auto.value:auto-value-moshi-runtime:$autovalue_moshi_version"
 
-    compile "org.openjdk.jmh:jmh-core:$jmh_version"
-    compile 'com.google.guava:guava:22.0'
+    implementation "com.google.auto.value:auto-value-annotations:$autovalue_version"
+    implementation "org.openjdk.jmh:jmh-core:$jmh_version"
+    implementation "com.google.guava:guava:22.0"
 
-    compile 'com.squareup.okio:okio:1.13.0'
-    compile 'com.squareup.moshi:moshi:1.5.0'
-    compile 'com.google.code.gson:gson:2.8.1'
-    compile 'com.esotericsoftware:kryo:4.0.0'
+    implementation "com.squareup.okio:okio:$okio_version"
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    implementation "com.google.code.gson:gson:$gson_version"
+    implementation "com.esotericsoftware:kryo:4.0.2"
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_runtime_version"
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.3'
-    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+    testImplementation group: "junit", name: "junit", version: "4.12"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version"
 }
 
